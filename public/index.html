@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
         <meta name="description" content="A technology radar linked to a public Google spreadsheet for easy editing.">
-        <meta name="author" content="Erik Vullings">
+        <meta name="author" content="">
         <link rel="icon" href="../../favicon.ico">
 
         <title>Technology Radar</title>
@@ -28,6 +28,7 @@
     <body data-ng-controller="appCtrl" data-ng-cloak>
     <!-- <script src="https://www.youtube.com/iframe_api"></script> -->
     <!-- build:js techradar.js -->
+    
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="bower_components/angular/angular.min.js"></script>
@@ -38,6 +39,7 @@
     <script src="bower_components/pnotify/pnotify.core.js"></script>
     <script src="bower_components/angular-sanitize/angular-sanitize.min.js"></script>
     <script src="bower_components/wiz-markdown/wizMarkdown/wizMarkdown.min.js"></script>
+    <script src="bower_components/lodash/dist/lodash.js"></script>
 
     <script src="./includes/js/tabletop.js"></script>
     <script src="./includes/js/itemslide.min.js"></script>
@@ -58,25 +60,27 @@
     <script src="./app/homeCtrl.js"></script>
     <script src="./app/app.js"></script>
     <script src="./includes/js/templates.js"></script>
+    <script src="bower_components/angularjs-dropdown-multiselect/dist/angularjs-dropdown-multiselect.min.js"></script>
+    
     <!-- endbuild -->
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <!-- <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script> -->
         <nav class="navbar navbar-inverse navbar-fixed-top">
           <div class="container">
-            <div class="navbar-header" style="margin-top:-6px" data-toggle="tooltip" data-placement="bottom" title="TNO's open source Technology Radar">
-                <a class="navbar-brand" target="_blank" href="http://www.tno.nl">
+            <div class="navbar-header" style="margin-top:-6px" data-toggle="tooltip" data-placement="bottom" title="Technology Radar">
+                <a class="navbar-brand" target="_blank" href="http://www.allenovery.com">
                     <span>
-                        <img src="img/TNO White.png" alt="Technology Radar" width="88" height="32" />&nbsp;&nbsp;Technology Radar
+                        &nbsp;&nbsp;Technology Radar
                     </span>
                 </a>
             </div>
             <div id="navbar" class="collapse navbar-collapse">
-              <ul class="nav navbar-nav">
+              <!--<ul class="nav navbar-nav">
                 <li ng-class="{active: vm.$route.current.activetab == 'home'}"><a href="#/home">Home</a></li>
                 <li ng-class="{active: vm.$route.current.activetab == 'about'}"><a href="#/about">About</a></li>
                 <li ng-class="{active: vm.$route.current.activetab == 'contact'}"><a href="#/contact">Contact</a></li>
-              </ul>
+              </ul>-->
 
             <!-- Filter technologies that are shown -->
             <form class="navbar-form navbar-right pull-right" style="margin-right:0" role="search">
@@ -102,6 +106,8 @@
                   <rating ng-model="tech.priority" max="5" state-on="'fa fa-dot-circle-o'" state-off="'fa fa-circle-o'"></rating>
               </div>
 
+            <div ng-dropdown-multiselect="" options='years' selected-model="years">Select years</div>
+
             </div><!--/.nav-collapse -->
           </div>
         </nav>
@@ -110,8 +116,10 @@
     </body>
     
 <script>
-    $(document).ready(function(){
-    $('[data-toggle="tooltip"]').tooltip();   
+    $(document).ready(function()
+    {
+    $('[data-toggle="tooltip"]').tooltip();
+    console.log($scope.vm.technologies);
 });
 </script>
 </html>

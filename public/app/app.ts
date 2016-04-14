@@ -8,7 +8,7 @@ module App {
     }
 
     export class AppCtrl {
-        private public_spreadsheet_url = 'https://docs.google.com/spreadsheets/d/1Q21QWlx3GqKjaLLwaq5fJb0eFwXouDMjk_cdideCHMk/pubhtml?gid=1695252245&single=true';
+        private public_spreadsheet_url = 'https://docs.google.com/spreadsheets/d/1BcGsFEsH07Vj8_oXO0Fwx39LKzQCG-DtCevglXtKCbs/pubhtml';
 
         // It provides $injector with information about dependencies to be injected into constructor
         // it is better to have it close to the constructor, because the parameters must match in count and type.
@@ -25,9 +25,9 @@ module App {
             private $scope             : IAppScope,
             private busService         : csComp.Services.MessageBusService,
             private spreadsheetService : csComp.Services.SpreadsheetService
-            ) {
+            ) 
+            {
             $scope.vm = this;
-
             spreadsheetService.loadTechnologies(this.public_spreadsheet_url, () => busService.publish('technologies', 'loaded'));
         }
     }
@@ -39,14 +39,29 @@ module App {
             'techRadar.infoslide',
             'techRadar.techRadarChart',
             'techRadar.youtube',
-            'wiz.markdown'
+            'wiz.markdown',
+            'angularjs-dropdown-multiselect'
         ])
         .filter('priorityFilter', function() {
-            return function(technologies: Technology[], priorityLevel: number) {
+            return function(technologies: Technology[], priorityLevel: number) 
+            {
                 var filteredItems = [];
                 if (typeof technologies === 'undefined') return filteredItems;
                 technologies.forEach((t) => {
                     if (t.priority <= priorityLevel) filteredItems.push(t);
+                });
+                return filteredItems;
+            };
+        })
+        .filter('yearsFilter', function() {
+            return function(technologies: Technology[], selectedYears: number[]) 
+            {
+                var filteredItems = [];
+                if (typeof technologies === 'undefined') return filteredItems;
+                
+                technologies.forEach((t) => 
+                {
+                    if (selectedYears.indexOf(t.yearOfAction)<-1) filteredItems.push(t);
                 });
                 return filteredItems;
             };
@@ -57,19 +72,19 @@ module App {
                     templateUrl: 'partials/home.tpl.html',
                     activetab: 'home',
                     controller: HomeCtrl
-                })
-                .when('/about', {
-                    templateUrl: 'partials/about.tpl.html',
-                    activetab: 'about'
-                    //, controller: 'aboutCtrl'
-                })
-                .when('/contact', {
-                    templateUrl: 'partials/contact.tpl.html',
-                    activetab: 'contact'
-                })
-                .otherwise({
-                    redirectTo: '/home'
-                });
+                 });
+                // .when('/about', {
+                //     templateUrl: 'partials/about.tpl.html',
+                //     activetab: 'about'
+                //     //, controller: 'aboutCtrl'
+                // })
+                // .when('/contact', {
+                //     templateUrl: 'partials/contact.tpl.html',
+                //     activetab: 'contact'
+                // })
+                // .otherwise({
+                //     redirectTo: '/home'
+                // });
             // configure html5 to get links working on jsfiddle
             // $locationProvider.html5Mode({
             //     enabled: true,
