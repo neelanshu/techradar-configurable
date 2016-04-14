@@ -33,30 +33,10 @@ module TechRadar {
             public subTitle      : string,
             public text          : string,
             public color         : string,
-            public yearOfAction         : number,
             public visible       : boolean = true,
             public focus         : boolean = false
             ) {
               this.content = [];
             }
     }
-    
-    export class FilterOptions{
-        
-     public years  : FilterOption[] = [];
-     constructor()
-     {
-         this.years = [];
-     }
-   }
-   
-   
-   export class FilterOption {
-       constructor(
-           public id : number,
-           public displayText : string
-           ){
-               
-           }
-   }
 }

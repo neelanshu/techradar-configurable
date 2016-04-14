@@ -13,7 +13,6 @@ module csComp.Services {
         Subtitle:      string;
         ContentType:   string;
         Content:       string;
-        YearOfAction : number;
     }
 
     /**
@@ -22,15 +21,11 @@ module csComp.Services {
      */
     export class SpreadsheetService {
         public technologies: TechRadar.Technology[];
-        public years: TechRadar.FilterOption[];
-        
+
         /** Load the technologies */
-        public loadTechnologies(url: string, callback: () => void) 
-        {
-            this.loadSheet(url, (spreadsheet: ISpreadsheetRow[]) => 
-            {
+        public loadTechnologies(url: string, callback: () => void) {
+            this.loadSheet(url, (spreadsheet: ISpreadsheetRow[]) => {
                 this.technologies = [];
-                this.years = [];
                 var id = 1;
                 var page = 0;
                 var technology;
@@ -68,16 +63,12 @@ module csComp.Services {
                             row.Title,
                             row.Subtitle,
                             row.Text,
-                            color,
-                            row.YearOfAction);
+                            color);
                         this.technologies.push(technology);
-                        if (this.years.indexOf(new TechRadar.FilterOption(row.YearOfAction,row.YearOfAction.toString())) > -1 )
-                        this.years.push(new TechRadar.FilterOption(row.YearOfAction,row.YearOfAction.toString()));
                     }
 
                     if (row.ContentType === '') row.ContentType = 'markdown';
-                    if (row.Content !== '') 
-                    {
+                    if (row.Content !== '') {
                         var c = new TechRadar.Content(page++, row.ContentType, row.Content, row.Subtitle);
                         if (c.contentType.toLowerCase() === 'youtube') {
                             c.videoUrl = c.content.indexOf('http') > 0

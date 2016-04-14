@@ -1,15 +1,13 @@
 module App {
     import ISpreadsheetRow = csComp.Services.ISpreadsheetRow;
     import Technology      = TechRadar.Technology;
-    import FilterOption      = TechRadar.FilterOption;
 
     export interface IHomeScope extends ng.IScope {
         vm: HomeCtrl;
     }
 
     export class HomeCtrl {
-        private technologies: Technology[] = [];
-        private years: FilterOption[] = [] ;
+       private technologies: Technology[] = [];
 
         public options: TechRadar.RenderOptions;
 
@@ -36,8 +34,7 @@ module App {
             $scope.vm = this;
 
             this.options = { prio : { 1 : true, 2: true, 3:false} };
-            busService.subscribe('technology', (action: string, t: Technology) =>
-             {
+            busService.subscribe('technology', (action: string, t: Technology) => {
                 switch (action) {
                     case 'selected':
                         this.setFocus(t);
@@ -55,7 +52,6 @@ module App {
 
         private reload() {
             this.technologies = this.spreadsheetService.technologies;
-            this.years = this.spreadsheetService.years;
             if (!this.technologies || this.technologies.length === 0) return;
             this.$timeout(() => {
                 this.initSlider();
