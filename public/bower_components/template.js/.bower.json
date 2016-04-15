@@ -1,0 +1,37 @@
+{
+  "name": "template.js",
+  "main": "template.js",
+  "version": "0.7.1",
+  "homepage": "https://github.com/yanhaijing/template.js",
+  "authors": [
+    "yanhaijing <yanhaijing@yeah.net>"
+  ],
+  "description": "template.js 一款javascript模板引擎，简单，好用。",
+  "keywords": [
+    "template",
+    "template.js",
+    "js"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "moduleType": [
+    "amd",
+    "globals",
+    "node"
+  ],
+  "_release": "0.7.1",
+  "_resolution": {
+    "type": "version",
+    "tag": "v0.7.1",
+    "commit": "f2c7361de26fdcba7e1eeb1a26a99e5139570b2b"
+  },
+  "_source": "https://github.com/yanhaijing/template.js.git",
+  "_target": "*",
+  "_originalSource": "template.js"
+}
